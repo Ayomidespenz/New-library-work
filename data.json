@@ -1,0 +1,141 @@
+
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "Things Fall Apart",
+            "author": "Chinua Achebe",
+            "genre": "Fiction",
+            "availability": "Available",
+            "borrowCount": 0,
+            "cover_image": "/image-folder/thingsFall.jpeg"
+        },
+        {
+            "id": 2,
+            "title": "Half of a Yellow Sun",
+            "author": "Chimamanda Ngozi Adichie",
+            "genre": "Historical Fiction",
+            "availability": "Available",
+            "borrowCount": 0,
+            "cover_image": "/image-folder/halfOfaYellow.jpeg"
+        },
+      {
+        "id": 3,
+        "title": "Americanah",
+        "author": "Chimamanda Ngozi Adichie",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/americanah.jpeg"
+    },
+    {
+        "id": 4,
+        "title": "Purple Hibiscus",
+        "author": "Chimamanda Ngozi Adichie",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/purpleHibiscus.jpeg"
+    },
+    {
+        "id": 5,
+        "title": "So Long a Letter",
+        "author": "Mariama Bâ",
+        "genre": "Epistolary Novel",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/soLong.jpeg"
+    },
+    {
+        "id": 6,
+        "title": "A Long Way Gone: Memoirs of a Boy Soldier",
+        "author": "Ishmael Beah",
+        "genre": "Autobiography",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/aLongWay.jpeg"
+    },
+    {
+        "id": 7,
+        "title": "The Secret Lives of Baba Segi's Wives",
+        "author": "Lola Shoneyin",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/secretlife.jpeg"
+    },
+    {
+        "id": 8,
+        "title": "Nervous Conditions",
+        "author": "Tsitsi Dangarembga",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/nervouscondition.jpeg"
+    },
+    {
+        "id": 9,
+        "title": "Disgrace",
+        "author": "J.M. Coetzee",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/disgrace.jpeg"
+    },
+    {
+        "id": 10,
+        "title": "No Longer at Ease",
+        "author": "Chinua Achebe",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/noLong.jpeg"
+    },
+    {
+        "id": 11,
+        "title": "Homegoing",
+        "author": "Yaa Gyasi",
+        "genre": "Historical Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/homegoing.jpeg"
+    },
+    {
+        "id": 12,
+        "title": "Season of Migration to the North",
+        "author": "Tayeb Salih",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/seasonmigration.jpeg"
+    },
+    {
+        "id": 13,
+        "title": "The Famished Road",
+        "author": "Ben Okri",
+        "genre": "Magical Realism",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/theroad.jpeg"
+    },
+    {
+        "id": 14,
+        "title": "Cry, the Beloved Country",
+        "author": "Alan Paton",
+        "genre": "Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/crycountry.jpeg"
+    },
+    {
+        "id": 15,
+        "title": "Kintu",
+        "author": "Jennifer Nansubuga Makumbi",
+        "genre": "Historical Fiction",
+        "availability": "Available",
+        "borrowCount": 0,
+        "cover_image": "/image-folder/kintu.jpeg"
+    }
+      
+    ]
+  }
