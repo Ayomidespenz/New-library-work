@@ -6,23 +6,19 @@
     <title>Ameer Library</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="style.css">
+    <!-- QRCode.js for QR code generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <!-- Landing Page -->
     <div id="landing-page" class="landing-bg d-flex flex-column justify-content-center align-items-center">
-        
         <h1 class="display-4 mb-4 animate__animated animate__bounce">Welcome to Ameer Library System</h1>
         <p class="lead mb-5">Borrow books, manage your wishlist, or oversee library activities.</p>
         <div>
-            
             <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#user-login-modal">User Login</button>
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#librarian-login-modal">Librarian Login</button>
         </div>
@@ -85,7 +81,6 @@
         </div>
     </div>
 
-    
     <div id="main-app" class="d-none">
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -116,6 +111,12 @@
 
         <!-- Main Container -->
         <div class="container my-5">
+            <!-- Book Recommendations -->
+            <div id="recommendations-container" class="mb-4"></div>
+
+            <!-- Reading Progress Tracker -->
+            <div id="reading-progress-container" class="mb-4"></div>
+
             <!-- User Dashboard: Book Catalog -->
             <section id="catalog" class="mb-5 d-none">
                 <h2 class="mb-4">Book Catalog</h2>
@@ -126,7 +127,6 @@
                     <div class="col-md-3">
                         <select id="genre-filter" class="form-select">
                             <option value="">All Genres</option>
-                            <!-- Dynamically populated -->
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -139,6 +139,56 @@
                 </div>
                 <div id="book-catalog" class="row row-cols-1 row-cols-md-3 g-4"></div>
             </section>
+
+            <!-- Book Details Modal (for reviews, QR, progress) -->
+            <div class="modal fade" id="book-detail-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content p-3">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="book-detail-title"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="book-detail-info"></div>
+                            <hr>
+                            <!-- User Reviews -->
+                            <div>
+                                <h6>Reviews</h6>
+                                <div id="reviews-container"></div>
+                                <form id="review-form" data-book-id="">
+                                    <div class="mb-2">
+                                        <label for="review-rating" class="form-label">Rating (1-5):</label>
+                                        <input type="number" id="review-rating" min="1" max="5" class="form-control" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="review-text" class="form-label">Review:</label>
+                                        <input type="text" id="review-text" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                                </form>
+                            </div>
+                            <hr>
+                            <!-- Reading Progress -->
+                            <div>
+                                <h6>Reading Progress</h6>
+                                <select id="progress-status" class="form-select mb-2">
+                                    <option value="">Set status...</option>
+                                    <option value="Want to Read">Want to Read</option>
+                                    <option value="Reading">Reading</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <hr>
+                            <!-- QR Code -->
+                            <div>
+                                <h6>Book QR Code</h6>
+                                <div id="qr-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- User Dashboard: Borrow Book -->
             <section id="borrow" class="mb-5 d-none">
@@ -175,38 +225,47 @@
                 <div id="wishlist-catalog" class="row row-cols-1 row-cols-md-3 g-4"></div>
             </section>
 
-            <!-- Librarian Dashboard -->
-            <section id="dashboard" class="mb-5 d-none">
-                <h2 class="mb-4">Librarian Dashboard</h2>
-                <div class="row">
-                    <div class="col-md-6">
-                        <canvas id="genre-chart"></canvas>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>Statistics</h4>
-                        <p>Total Books: <span id="total-books">0</span></p>
-                        <p>Total Borrowed: <span id="total-borrowed">0</span></p>
-                        <p>Total Available: <span id="total-available">0</span></p>
-                        <p>Most Borrowed Book: <span id="most-borrowed">None</span></p>
-                    </div>
-                </div>
-                <h3 class="mt-4">User Activities</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Borrowed By</th>
-                            <th>Due Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="activity-table"></tbody>
-                </table>
-                <button id="reset-storage" class="btn btn-danger mt-3">Reset Local Storage</button>
-            </section>
+
+<!-- Librarian Dashboard -->
+<section id="dashboard" class="mb-5 d-none">
+    <h2 class="mb-4">Librarian Dashboard</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="genre-chart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h4>Statistics</h4>
+            <p>Total Books: <span id="total-books">0</span></p>
+            <p>Total Borrowed: <span id="total-borrowed">0</span></p>
+            <p>Total Available: <span id="total-available">0</span></p>
+            <p>Most Borrowed Book: <span id="most-borrowed">None</span></p>
+        </div>
+    </div>
+    <h3 class="mt-4">User Activities</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Borrowed By</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody id="activity-table"></tbody>
+    </table>
+    <!-- Overdue Books Table -->
+    <div id="admin-overdue-section" class="mt-5"></div>
+    <!-- All Book Reviews Table -->
+    <div id="admin-reviews-section" class="mt-5"></div>
+    
+    <div class="d-flex gap-3 mt-4 mb-2">
+        <button id="admin-retrieve-btn" class="btn btn-warning">Retrieve All Overdue Books</button>
+        <button id="reset-storage" class="btn btn-danger">Reset Local Storage</button>
+    </div>
+</section>
+
         </div>
     </div>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>

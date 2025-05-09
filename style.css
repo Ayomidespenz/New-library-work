@@ -33,3 +33,64 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
 }
+
+#admin-reviews-section .table th, 
+#admin-reviews-section .table td {
+    vertical-align: middle;
+    font-size: 1rem;
+}
+#admin-reviews-section .table th {
+    background: #677c9be7;
+    font-weight: 600;
+}
+
+/* Responsive adjustments for mobile and tablet */
+@media (max-width: 991px) {
+    #landing-page {
+        background-position: center;
+        background-size: cover;
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    .book-card {
+        margin-bottom: 1rem;
+    }
+    .cover-img {
+        height: 120px;
+    }
+}
+
+@media (max-width: 767px) {
+    .book-card {
+        font-size: 0.95rem;
+    }
+    .cover-img {
+        height: 100px;
+    }
+    .modal-content,
+    .card {
+        padding: 0.5rem;
+    }
+    .landing-bg {
+        padding: 1rem 0.5rem;
+    }
+}
+
+@media (max-width: 575px) {
+    #landing-page {
+        padding: 1rem 0.25rem;
+        font-size: 1rem;
+    }
+    .book-card {
+        font-size: 0.9rem;
+    }
+    .cover-img {
+        height: 80px;
+    }
+    .landing-bg {
+        padding: 0.5rem 0.1rem;
+    }
+    .table {
+        font-size: 0.9rem;
+    }
+}
